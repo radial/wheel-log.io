@@ -11,7 +11,7 @@ hub:
         - /data
         - /run
     environment:
-        WHEEL_REPO: "https://github.com/radial/wheel-log.io"
+        WHEEL_REPO: "https://github.com/radial/wheel-log.io.git"
 logio:
     image: "radial/log.io:latest"
     volumes_from:
