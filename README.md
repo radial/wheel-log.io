@@ -8,7 +8,7 @@ server for collecting and viewing the stream data.
 Since this is a log viewing application, running by itself is pretty useless as
 it will only view it's own logs. So if you already use fig to start up a
 collection of images (let's assume other Radial Spokes) then you may combine the
-contents of all the `fig.yml` files to produce an even larger Wheel. If all the
+contents of all the `fig.yml` files to produce a hybrid Wheel. If all the
 images keep to the Radial topology guidelines, then they should work
 out-of-the-box.
 
@@ -23,7 +23,7 @@ the other. All other port/IP customizations are done via environment variables.
 ## Radial
 
 [Radial][radial] is a [Docker][docker] container topology strategy that
-seeks to put the cannon of Docker best-practices into simple, re-usable, and
+seeks to put the canon of Docker best-practices into simple, re-usable, and
 scalable images, dockerfiles, and repositories. Radial categorizes containers
 into 3 types: Axles, Hubs, and Spokes. A Wheel is a repository used to recreate
 an application stack consisting of any combination of all three types of
