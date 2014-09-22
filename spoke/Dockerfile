@@ -22,7 +22,6 @@ RUN             apt-get -q update && apt-get -qyV install \
                 apt-get -qyV autoremove &&\
                 rm -rf /var/lib/apt/lists/* &&\
                 apt-get clean
-RUN             env --unset=DEBIAN_FRONTEND
 
 # Process startup info
 ENV             SPOKE_NAME logio
