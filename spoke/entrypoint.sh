@@ -1,13 +1,18 @@
 #!/bin/bash
 set -e
 
+# Tunable settings
 WHEEL_NAME=${WHEEL_NAME:-$(echo "wheel-$(date | md5sum | head -c6)")}
-ERR_LOG=${ERR_LOG:-"/log/$HOSTNAME/logio_stderr.log"}
 SERVER_LISTEN_ADDRESS=${SERVER_LISTEN_ADDRESS:-"0.0.0.0"}
 SERVER_ADDRESS=${SERVER_ADDRESS:-"0.0.0.0"}
 LISTEN_PORT=${LISTEN_PORT:-"28777"}
 WEB_PORT=${WEB_PORT:-"28778"}
 DELAY=${DELAY:-5}
+# Mode options: {server|harvester|default}
+MODE=${MODE:-"default"}
+
+# Misc settings
+ERR_LOG=/log/$HOSTNAME/logio_stderr.log
 
 # log.io is surprisingly lacking in command line options (they have none) and
 # all logs need to be explicitely listed in the harvester.conf (which is
@@ -53,25 +58,35 @@ restart_message() {
 launch() {
     case "$1" in
         server)
-            printf "" > /root/.log.io/log_server.conf
-            create_web_server_conf
-            confStr="${pre}${server_conf}}"
-            printf "$confStr" | tee -a /root/.log.io/log_server.conf
-            exec /usr/local/bin/log.io-server | tee -a $ERR_LOG
+            if [ "$MODE" = "harvester" ]; then
+                exit 0
+            else
+                printf "" > /root/.log.io/log_server.conf
+                create_web_server_conf
+                confStr="${pre}${server_conf}}"
+                printf "$confStr" | tee -a /root/.log.io/log_server.conf
+                exec /usr/local/bin/log.io-server | tee -a $ERR_LOG
+            fi
             ;;
         harvester)
-            printf "" > /root/.log.io/harvester.conf
-            confStr="${pre}${w_conf_wrapper}"
-            printf "$confStr" | tee -a /root/.log.io/harvester.conf
-            sleep ${DELAY}s && create_harvester_conf
-            exec /usr/local/bin/log.io-harvester | tee -a $ERR_LOG
+            if [ "$MODE" = "server" ]; then
+                exit 0
+            else
+                printf "" > /root/.log.io/harvester.conf
+                confStr="${pre}${w_conf_wrapper}"
+                printf "$confStr" | tee -a /root/.log.io/harvester.conf
+                sleep ${DELAY}s && create_harvester_conf
+                exec /usr/local/bin/log.io-harvester | tee -a $ERR_LOG
+            fi
+            ;;
+        *)
+            exit 1
             ;;
     esac
 }
 
-
-if [ ! -e /tmp/logio_first_run ]; then
-    touch /tmp/logio_first_run
+if [ ! -e /tmp/logio_${1}_first_run ]; then
+    touch /tmp/logio_${1}_first_run
     launch "$1"
 else
     restart_message

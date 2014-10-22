@@ -18,7 +18,7 @@ RUN             apt-get -q update && apt-get -qyV install \
                 make --quiet -C $NODE_SRC_PATH install &&\
                 wget -q -O - https://npmjs.org/install.sh | clean=no sh &&\
                 npm install -g log.io --user "root" &&\
-                apt-get -qyV remove g++ make git libssl-dev pkg-config &&\
+                apt-get -qyV remove g++ make libssl-dev pkg-config &&\
                 apt-get -qyV autoremove &&\
                 rm -rf /var/lib/apt/lists/* &&\
                 apt-get clean
@@ -27,8 +27,12 @@ RUN             apt-get -q update && apt-get -qyV install \
 ENV             SPOKE_NAME logio
 
 COPY            /web_server.conf /root/.log.io/web_server.conf
-
 COPY            /entrypoint.sh /entrypoint.sh
+
+# For Spoke-detach mode
+WORKDIR         /root
+RUN             git config --global user.email "radial@brianclements.net" &&\
+                git config --global user.name "radial"
 
 EXPOSE          28777
 EXPOSE          28778
