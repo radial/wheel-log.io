@@ -38,6 +38,16 @@ Tunable environment variables; modify at runtime. Italics are defaults.
     to wait for all container startup processes to finish before searching for
     logs, just for the supervisor daemon on each to start up and create the
     actual log file. Under normal circumstances, this isn't very long.
+  - **MODE**: [__"default"__|"server"|"harvester"] Specialty options to allow this
+    Spoke to run detached from any Wheel and without the use of a Hub. The "default"
+    mode is to look for configuration via the Hub container, which, could very
+    well run as just a server or harvester, but will still need that defined via
+    configuration in the Hub. "server" and "harvester" modes will run as one or
+    the other, but independently to allow for one-off use on already running
+    Wheels or as stand-alone services. When using "server" or "harvester" modes,
+    the followling variables Spoke variables must be set as well:
+    - **SPOKE_DETACH_MODE**: {True|__False__} Enable Spoke-detach mode.
+    - **WHEEL_REPO**: {__empty__} Location of Wheel repo to look for configuration.
 
 ## Radial
 

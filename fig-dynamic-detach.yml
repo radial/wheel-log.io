@@ -1,0 +1,19 @@
+logs:
+    image: "radial/axle-base:latest"
+    volumes:
+        - /log
+logioHarvester:
+  image: "radial/log.io:latest"
+  volumes_from:
+    - logs
+  environment:
+    WHEEL_REPO: "https://github.com/radial/wheel-log.io.git"
+    SPOKE_DETACH_MODE: True
+    SERVER_ADDRESS: "192.168.1.1"
+    MODE: "harvester"
+logioServer:
+  image: "radial/log.io:latest"
+  environment:
+    WHEEL_REPO: "https://github.com/radial/wheel-log.io.git"
+    SPOKE_DETACH_MODE: True
+    MODE: "server"
