@@ -4,8 +4,8 @@ set -e
 # Tunable settings
 WHEEL_NAME=${WHEEL_NAME:-$(echo "wheel-$(date | md5sum | head -c6)")}
 SERVER_LISTEN_ADDRESS=${SERVER_LISTEN_ADDRESS:-"0.0.0.0"}
+SERVER_LISTEN_PORT=${SERVER_LISTEN_PORT:-"28777"}
 SERVER_ADDRESS=${SERVER_ADDRESS:-"0.0.0.0"}
-LISTEN_PORT=${LISTEN_PORT:-"28777"}
 WEB_PORT=${WEB_PORT:-"28778"}
 DELAY=${DELAY:-5}
 # Mode options: {server|harvester|default}
@@ -20,8 +20,8 @@ ERR_LOG=/log/$HOSTNAME/logio_stderr.log
 
 t="    "
 pre="exports.config = {"
-server_conf="\n${t}${t}host: '${SERVER_LISTEN_ADDRESS}',\n${t}${t}port: ${LISTEN_PORT}\n${t}"
-w_server_conf="\n${t}${t}host: '${SERVER_ADDRESS}',\n${t}${t}port: ${LISTEN_PORT}\n${t}"
+server_conf="\n${t}${t}host: '${SERVER_LISTEN_ADDRESS}',\n${t}${t}port: ${SERVER_LISTEN_PORT}\n${t}"
+w_server_conf="\n${t}${t}host: '${SERVER_ADDRESS}',\n${t}${t}port: ${SERVER_LISTEN_PORT}\n${t}"
 s_conf_wrapper="\n${t}server: {${server_conf}},\n"
 w_conf_wrapper="\n${t}server: {${w_server_conf}},\n"
 
