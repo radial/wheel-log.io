@@ -47,6 +47,7 @@ create_harvester_conf() {
 create_web_server_conf() {
     # not fully implemented.
     # TODO: dynamic HTTPS/SSL config, websocket and http restrictions
+    cp -f /tmp/web_server.conf /root/.log.io/web_server.conf
     printf "\n${t}${t}host: '${SERVER_LISTEN_ADDRESS}',\n${t}${t}port: ${WEB_PORT},\n}" | tee -a /root/.log.io/web_server.conf
 }
 

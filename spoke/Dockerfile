@@ -26,7 +26,7 @@ RUN             apt-get -q update && apt-get -qyV install \
 # Process startup info
 ENV             SPOKE_NAME logio
 
-COPY            /web_server.conf /root/.log.io/web_server.conf
+COPY            /web_server.conf /tmp/web_server.conf
 COPY            /entrypoint.sh /entrypoint.sh
 
 # For Spoke-detach mode
