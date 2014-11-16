@@ -1,7 +1,7 @@
 logs:
-    image: "radial/axle-base:latest"
-    volumes:
-        - /log
+  image: "radial/axle-base:latest"
+  volumes:
+    - /log
 logioHarvester:
   image: "radial/log.io:latest"
   volumes_from:

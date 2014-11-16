@@ -1,15 +1,15 @@
 logs:
-    image: "radial/axle-base:latest"
-    volumes:
-        - /log
+  image: "radial/axle-base:latest"
+  volumes:
+    - /log
 hub:
-    build: hub
-    volumes_from:
-        - logs
+  build: hub
+  volumes_from:
+    - logs
 logio:
-    build: spoke
-    volumes_from:
-        - hub
-    ports:
-        - "28777:28777"
-        - "28778:28778"
+  build: spoke
+  volumes_from:
+    - hub
+  ports:
+    - "28777:28777"
+    - "28778:28778"
