@@ -6,6 +6,9 @@ logioHarvester:
   image: "radial/log.io:latest"
   volumes_from:
     - logs
+  ports:
+    - "28777:28777"
+    - "28778:28778"
   environment:
     WHEEL_REPO: "https://github.com/radial/wheel-log.io.git"
     SPOKE_DETACH_MODE: True
@@ -13,6 +16,9 @@ logioHarvester:
     MODE: "harvester"
 logioServer:
   image: "radial/log.io:latest"
+  ports:
+    - "28777:28777"
+    - "28778:28778"
   environment:
     WHEEL_REPO: "https://github.com/radial/wheel-log.io.git"
     SPOKE_DETACH_MODE: True
