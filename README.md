@@ -24,30 +24,32 @@ the other. All other port/IP customizations are done via environment variables.
 
 Tunable environment variables; modify at runtime. Italics are defaults.
 
-  - **WHEEL_NAME**: {_random_} Unique name to associate to the Wheel logs being
+  - **$WHEEL_NAME**: [_random_] Unique name to associate to the Wheel logs being
     harvested; what Log.io calls a "node".
-  - **SERVER_LISTEN_ADDRESS**: {_"0.0.0.0"_} Listening address of server.
-  - **SERVER_LISTEN_PORT**: {_"28777"_} Listening port of server.
-  - **SERVER_ADDRESS**: {_"0.0.0.0"_} Server address for harvester to send
+  - **$SERVER_LISTEN_ADDRESS**: [_"0.0.0.0"_] Listening address of server.
+  - **$SERVER_LISTEN_PORT**: [_"28777"_] Listening port of server.
+  - **$SERVER_ADDRESS**: [_"0.0.0.0"_] Server address for harvester to send
     stream data to.
-  - **WEB_PORT**: {_"28778"_} Port to access web interface on.
-  - **DELAY**: {_"5"_} Log.io needs to explicitly name log files, but Radial
+  - **$WEB_PORT**: [_"28778"_] Port to access web interface on.
+  - **$DELAY**: [_"5"_] Log.io needs to explicitly name log files, but Radial
     Wheels are dynamic regarding Spokes and log files. So the entrypoint script
     generates them dynamincally and this number delays the harvester in seconds
-    before searching and generating the log file manifest. **Note:** you don't need
-    to wait for all container startup processes to finish before searching for
-    logs, just for the supervisor daemon on each to start up and create the
+    before searching and generating the log file manifest. **Note:** you don't
+    need to wait for all container startup processes to finish before searching
+    for logs, just for the supervisor daemon on each to start up and create the
     actual log file. Under normal circumstances, this isn't very long.
-  - **MODE**: [__"default"__|"server"|"harvester"] Specialty options to allow this
-    Spoke to run detached from any Wheel and without the use of a Hub. The "default"
-    mode is to look for configuration via the Hub container, which, could very
-    well run as just a server or harvester, but will still need that defined via
-    configuration in the Hub. "server" and "harvester" modes will run as one or
-    the other, but independently to allow for one-off use on already running
-    Wheels or as stand-alone services. When using "server" or "harvester" modes,
-    the followling variables Spoke variables must be set as well:
-    - **SPOKE_DETACH_MODE**: {True|__False__} Enable Spoke-detach mode.
-    - **WHEEL_REPO**: {__empty__} Location of Wheel repo to look for configuration.
+  - **$MODE**: [_"default"_|"server"|"harvester"] Specialty options to allow this
+    Spoke to run detached from any Wheel and without the use of a Hub. The
+    "default" mode is to look for configuration via the Hub container, which,
+    could very well run as just a server or harvester, but will still need that
+    defined via configuration in the Hub. "server" and "harvester" modes will
+    run as one or the other, but independently to allow for one-off use on
+    already running Wheels or as stand-alone services. When using "server" or
+    "harvester" modes, the followling variables Spoke variables must be set as
+    well:
+    - **$SPOKE_DETACH_MODE**: [True|_False_] Enable Spoke-detach mode.
+    - **$WHEEL_REPO**: [_empty_] Location of Wheel repo to look for
+      configuration.
 
 ## Radial
 
