@@ -7,6 +7,8 @@ MAINTAINER      Brian Clements <radial@brianclements.net>
 ENV             NODE_VERSION v0.10.29
 ENV             NODE_SRC_PATH /tmp/node-src/node-$NODE_VERSION
 RUN             mkdir -p /tmp/node-src
+RUN             apt-get -q update && apt-get -qyV install \
+                    wget
 RUN             wget -q -O - http://nodejs.org/dist/"$NODE_VERSION"/node-"$NODE_VERSION".tar.gz | tar -zx -C /tmp/node-src
 
 # Install packages
