@@ -1,5 +1,20 @@
 # Log.io: Real-Time Log Monitoring in Your Browser
 
+**THIS IMAGE HAS REACHED IT'S END-OF-LIFE AND IS NO LONGER BEING UPDATED**
+
+[Log.io][log.io] was sketchy at best when it was "working". But it's clear that
+the project is no longer being supported or actively worked on. There were just
+too many obstacles to overcome to get it working and updating these docker
+images became nearly impossible when the application stopped compiling
+altogether. So I'm giving up here to spend my time on real logging solutions and
+I suggest you do too.
+
+I'll leave the repository here and the last working image up on the Docker hub
+for archival purposes, but I will remove all update hooks to keep it in the last
+working state.
+
+----
+
 This is a Radial Wheel repository for the [Log.io Web App][log.io].  Log.io is a
 log stream collecting and viewing tool with a web interface for viewing the log
 data. It comes in two parts: a harvester for watching logs for changes, and a
